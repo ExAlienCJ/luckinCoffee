@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+  }
+  .box {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 300px;
+    height: 300px;
+    border: 1px solid;
+    text-align: center;
+    padding: 80px;
+  }
+
+  button {
+    margin-top: 50px;
+  }
+
+  table {
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  th {
+    padding: 0 20px;
+  }
+  button{
+    padding: 0 20px;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
+
+<body>
+  <div class="box">
+    <input type="number">
+    <br>
+    <button>随机</button>
+    <button>查询</button>
+    <table>
+      <tr>
+        <th>组号</th>
+        <th>数字</th>
+      </tr>
+      <tr>
+        <th class="group"></th>
+        <th class="number"></th>
+      </tr>
+      <tr>
+        <th class="group"></th>
+        <th class="number"></th>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>
+<script>
+  var btn1 = document.getElementsByTagName("button")[0];
+  var btn2 = document.getElementsByTagName("button")[1];
+  var inp = document.getElementsByTagName("input")[0];
+  var group = document.getElementsByClassName("group");
+  var number = document.getElementsByClassName("number");
+  var arr1 = [];
+  var arr2 = [];
+  function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  for (let i = 0; i < 100; i++) {
+    arr1.push({
+      group: i,
+      number: String(getRandom(1, 5)) + String(getRandom(1, 4)) + String(getRandom(1, 3))
+    })
+    arr2.push(
+      {
+        group: i,
+        number: String(getRandom(1, 3)) + String(getRandom(1, 3))
+      }
+    )
+  }
+  console.log(arr1);
+  console.log(arr2);
+  btn1.onclick = function () {
+    if (inp.value > 100 || inp.value < 0) {
+      alert("请输入0-100的数字");
+    } else {
+      let random1 = getRandom(0, Number(inp.value) + 1);
+      let random2 = getRandom(0, Number(inp.value) + 1);
+      group[0].innerHTML = random1
+      group[1].innerHTML = random2
+      number[0].innerHTML = arr1[random1].number
+      number[1].innerHTML = arr2[random2].number
+    }
+  }
+  btn2.onclick = function () {
+    if (inp.value > 100 || inp.value < 0) {
+      alert("请输入0-100的数字");
+    } else {
+      group[0].innerHTML = arr1[inp.value].group
+      group[1].innerHTML = arr1[inp.value].group
+      number[0].innerHTML = arr1[inp.value].number
+      number[1].innerHTML = arr2[inp.value].number
+    }
+  }
+</script>
